@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class NetworkUtils {
+    //the full url:
     ////https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=5c072a322c2b42dabd38340690536b1c
     final static String BASE_URL = "https://newsapi.org/v1/articles";
 
@@ -22,6 +23,7 @@ public class NetworkUtils {
     final static String PARAM_APIKEY = "apiKey";
     final static String APIKEY = "5c072a322c2b42dabd38340690536b1c";
 
+    //constructing the full url based on param-value pairs created above
     public static URL buildURL() {
         URL url = null;
         Uri builtUri = Uri.parse(BASE_URL).buildUpon()
@@ -39,6 +41,7 @@ public class NetworkUtils {
         return url;
     }
 
+    //connecting to the url
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         try {

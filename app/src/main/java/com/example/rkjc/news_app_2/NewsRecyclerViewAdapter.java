@@ -18,17 +18,22 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
     public ArrayList<NewsItem> newsItems;
     public Context context;
 
+    //constructor for the adapter
+    //recyclerView is created for the layout of this app because we have a bunch of news to load and we dont want to load it all at once
+    //so it gets some views and "recycle" those views with old + new data as you scroll up and down. wow such resource and time saving
     public NewsRecyclerViewAdapter(ArrayList<NewsItem> newsItems, Context context) {
         this.newsItems = newsItems;
         this.context = context;
     }
 
+    //updates the viewHolders you see as you scroll around
     @Override
     public void onBindViewHolder(NewsItemViewHolder holder, int position) {
         Log.d(TAG, "#" + position);
         holder.bind(position);
     }
 
+    //before creating the viewHolder for the news items, gotta initialize whatever is needed
     @Override
     public NewsItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
@@ -42,16 +47,20 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
         return viewHolder;
     }
 
+    //getting size of the news object//article array
     @Override
     public int getItemCount() {
         return newsItems.size();
     }
 
+    //viewHolder for what's going to display on the screen
+    //TextView are linked to the ones created in the layout/news_item.xml files
     class NewsItemViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView description;
         TextView date;
 
+        //constructor for this NewsItemViewHolder inner class
         public NewsItemViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.title);
@@ -59,11 +68,13 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
             date = itemView.findViewById(R.id.date);
         }
 
+        //changing the values/contents of the TextViews
         void bind(final int listIndex) {
             title.setText(newsItems.get(listIndex).getTitle());
             description.setText(newsItems.get(listIndex).getDescription());
             date.setText(newsItems.get(listIndex).getPublishedAt());
 
+            //whenever one of the news items is clicked, it directs you to the link of the full news
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
