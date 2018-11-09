@@ -7,12 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,24 +14,24 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    private RecyclerView newsList;
+    private RecyclerView recyclerView;
     private NewsRecyclerViewAdapter adapter;
-    private ArrayList<NewsItem> newsItems;
+    private ArrayList<NewsItem> newsItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstancesState) {
         super.onCreate(savedInstancesState);
         setContentView(R.layout.activity_main);
 
-        newsList = findViewById(R.id.news_recyclerview);
+        recyclerView = findViewById(R.id.news_recyclerview);
 
       //  LinearLayoutManager layoutManager = new LinearLayoutManager(this);
      //   newsList.setLayoutManager(layoutManager);
      //   newsList.setHasFixedSize(true);
 
         adapter = new NewsRecyclerViewAdapter(newsItems, this);
-        newsList.setAdapter(adapter);
-        newsList.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     public class newsQueryTask extends AsyncTask<URL, Void, String> {
@@ -49,15 +43,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(URL... params) {
             URL searchURL = params[0];
-            String newsSearchResults = null;
+            String newsResults = null;
 
             try {
-                newsSearchResults = NetworkUtils.getResponseFromHttpUrl(searchURL);
+                newsResults = NetworkUtils.getResponseFromHttpUrl(searchURL);
             }
             catch (IOException e) {
                 e.printStackTrace();
             }
-            return newsSearchResults;
+            return newsResults;
         }
 
         @Override

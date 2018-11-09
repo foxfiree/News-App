@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -55,15 +54,15 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
 
         public NewsItemViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.title);
-            description = (TextView) itemView.findViewById(R.id.description);
-            date = (TextView) itemView.findViewById(R.id.date);
+            title = itemView.findViewById(R.id.title);
+            description = itemView.findViewById(R.id.description);
+            date = itemView.findViewById(R.id.date);
         }
 
         void bind(final int listIndex) {
-            title.setText("Title: " + newsItems.get(listIndex).getTitle());
-            description.setText("Description: " + newsItems.get(listIndex).getDescription());
-            date.setText("Date: " + newsItems.get(listIndex).getPublishedAt());
+            title.setText(newsItems.get(listIndex).getTitle());
+            description.setText(newsItems.get(listIndex).getDescription());
+            date.setText(newsItems.get(listIndex).getPublishedAt());
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
