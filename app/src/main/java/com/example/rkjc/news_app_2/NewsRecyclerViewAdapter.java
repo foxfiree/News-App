@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerViewAdapter.NewsItemViewHolder> {
     private static final String TAG = NewsRecyclerViewAdapter.class.getSimpleName();
-    public ArrayList<NewsItem> newsItems;
-    public Context context;
+    ArrayList<NewsItem> newsItems;
+    Context context;
 
     //constructor for the adapter
     //recyclerView is created for the layout of this app because we have a bunch of news to load and we dont want to load it all at once
@@ -70,9 +70,9 @@ public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsRecyclerVi
 
         //changing the values/contents of the TextViews
         void bind(final int listIndex) {
-            title.setText(newsItems.get(listIndex).getTitle());
-            description.setText(newsItems.get(listIndex).getDescription());
-            date.setText(newsItems.get(listIndex).getPublishedAt());
+            title.setText("Title: " + newsItems.get(listIndex).getTitle());
+            description.setText("Description: " + newsItems.get(listIndex).getDescription());
+            date.setText("Date: " + newsItems.get(listIndex).getPublishedAt());
 
             //whenever one of the news items is clicked, it directs you to the link of the full news
             itemView.setOnClickListener(new View.OnClickListener() {
